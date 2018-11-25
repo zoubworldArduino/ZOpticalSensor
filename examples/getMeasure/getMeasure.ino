@@ -39,10 +39,7 @@
 #include <WireUtility.h>
 
 
-#define ROS_SERIAL (P_COM3.serial2)
-#define ROS_BAUDRATE 57600
-#include "ros.h"
-ros::NodeHandle  nh;
+
 
 #elif defined(BOARD_ID_Captor)
 #include <Wire.h>
@@ -52,16 +49,11 @@ ros::NodeHandle  nh;
 #include <WireUtility.h>
 
 
-#define ROS_SERIAL (P_COM0.serial2)
-#define ROS_BAUDRATE 57600
 
-#include "ros.h"
-ros::NodeHandle  nh;
 
 #else
 //#include <Servo.h> 
-#include "ros.h"
-ros::NodeHandle  nh;
+
 #endif
 
 //import the library in the sketch

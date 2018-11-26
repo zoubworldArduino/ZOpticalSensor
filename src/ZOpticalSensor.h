@@ -9,7 +9,8 @@
 #ifdef ROS_USED 
 #include <ros.h>
 #include <ros/time.h>
-#include <sensor_msgs/Range.h>
+//#include <sensor_msgs/Range.h>
+#include <std_msgs/Int16.h>
 #endif 
 
 class ZOpticalSensor
@@ -50,7 +51,8 @@ class ZOpticalSensor
 		private:
 		#ifdef ROS_USED 
     ros::NodeHandle  *nh;
-    sensor_msgs::Range range_msg;
+    //sensor_msgs::Range range_msg;
+	std_msgs::Int16 range_msg;
     ros::Publisher *pub_range;
 #endif
 			uint16_t previousValue;

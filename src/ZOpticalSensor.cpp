@@ -107,13 +107,15 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
   pub_range=new ros::Publisher( topic, &range_msg);
   nh->advertise(*pub_range);
   
+  /*
   range_msg.radiation_type = sensor_msgs::Range::INFRARED;
 //  range_msg.header.frame_id =  frameid;
   range_msg.field_of_view = 10;
   range_msg.min_range = 0 ;  //5mm
   range_msg.max_range = 4096*4;   //20mm
-  
   range_msg.header.stamp = nh->now();
+  */
+  
 }
 #define toNSec( t ) ((uint32_t)t.sec*1000000000ull + (uint32_t)t.nsec)
 /** loop :
@@ -121,14 +123,17 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
 */
 void ZOpticalSensor::loop()
 {
+  if (pub_range!=0){
 	ros::Time now=nh->now();
 
   // publish the range value every 50 milliseconds
   //   since it takes that long for the sensor to stabilize
-  if ( (toNSec( now ) ) > (((long)rate)+toNSec( (range_msg.header.stamp) ))){
-    range_msg.range = (float)getMeasure(   );
-    range_msg.header.stamp = now;
-    pub_range->publish(&range_msg);
+//  if ( (toNSec( now ) ) > (((long)rate)+toNSec( (range_msg.header.stamp) )))
+        //{
+    range_msg.data = getMeasure(   );
+  //  range_msg.range = (float)getMeasure(   );
+//    range_msg.header.stamp = now;
+     pub_range->publish(&range_msg);
   } 
 }
 #endif 

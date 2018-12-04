@@ -91,7 +91,7 @@ this update the threshold of detection.
 #ifdef ROS_USED 
 void ZOpticalSensor::setRefreshRateUs(uint32_t intervalTime)
 {
-	rate=intervalTime*1000LL;
+	rate=intervalTime;
 }
 
 // ROS SECTION :
@@ -106,7 +106,7 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
   nh=myNodeHandle;
   pub_range=new ros::Publisher( topic, &range_msg);
   nh->advertise(*pub_range);
-  
+  setRefreshRateUs( 100000);
   /*
   range_msg.radiation_type = sensor_msgs::Range::INFRARED;
 //  range_msg.header.frame_id =  frameid;
@@ -124,16 +124,21 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
 void ZOpticalSensor::loop()
 {
   if (pub_range!=0){
-	ros::Time now=nh->now();
+	//ros::Time now=nh->now();
+    
 
   // publish the range value every 50 milliseconds
   //   since it takes that long for the sensor to stabilize
-//  if ( (toNSec( now ) ) > (((long)rate)+toNSec( (range_msg.header.stamp) )))
-        //{
+  //if ( (toNSec( now ) ) > (((long)rate)+toNSec( (/*range_msg.header.*/stamp) )))
+    if(micros()-timestamp>rate)
+        {
     range_msg.data = getMeasure(   );
   //  range_msg.range = (float)getMeasure(   );
-//    range_msg.header.stamp = now;
+    /*range_msg.header.*/
+    //stamp = now;
+    timestamp=micros();
      pub_range->publish(&range_msg);
+        }
   } 
 }
 #endif 

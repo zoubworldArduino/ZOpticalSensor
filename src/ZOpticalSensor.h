@@ -43,13 +43,17 @@ class ZOpticalSensor
 #endif 
 
 		protected:
-			 uint32_t rate;
+			 
 			 uint16_t threshold;
 			 uint32_t pinIR;
 			 uint32_t pinIE;
 
 		private:
 		#ifdef ROS_USED 
+                  //ros::Time stamp;
+                  int timestamp;
+                  uint32_t rate;
+                  
     ros::NodeHandle  *nh;
     //sensor_msgs::Range range_msg;
 	std_msgs::Int16 range_msg;

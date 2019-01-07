@@ -105,6 +105,7 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
 {
   nh=myNodeHandle;
   pub_range=new ros::Publisher( topic, &range_msg);
+  assert( pub_range!=0);// heap issue.
   nh->advertise(*pub_range);
   setRefreshRateUs( 100000);
   /*

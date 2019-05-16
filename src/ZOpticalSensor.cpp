@@ -106,7 +106,9 @@ void ZOpticalSensor::setup( ros::NodeHandle * myNodeHandle,	const char   *	topic
   nh=myNodeHandle;
   pub_range=new ros::Publisher( topic, &range_msg);
   assert( pub_range!=0);// heap issue.
-  nh->advertise(*pub_range);
+  bool result=nh->advertise(*pub_range);
+  assert(result);
+  
   setRefreshRateUs( 100000);
   /*
   range_msg.radiation_type = sensor_msgs::Range::INFRARED;
@@ -138,7 +140,9 @@ void ZOpticalSensor::loop()
     /*range_msg.header.*/
     //stamp = now;
     timestamp=micros();
-     pub_range->publish(&range_msg);
+     
+                signed int result=pub_range->publish(&range_msg);
+           assert(result>=0);
         }
   } 
 }

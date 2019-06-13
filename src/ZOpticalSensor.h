@@ -32,8 +32,8 @@ class ZOpticalSensor
 			
 			
 			
-			void ZOpticalSensor::calibstep1();
-			void ZOpticalSensor::calibstep2();
+			void calibstep1();
+			void calibstep2();
                         uint16_t getMeasureLigth(   );
 			
 			

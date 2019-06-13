@@ -30,7 +30,7 @@ uint16_t ZOpticalSensor::getMeasure(   )
 		averageLigthLevel[(averageLigthIndex++)%16]=highZ;		
 		uint16_t delta=max(highZ,average)-min(highZ,average);
 		µ/
-		/*
+		/ *
 		if( !avoidBurstRead ) 
 			while( millis() <= lastTime + 10 ) 
 		{} //wait for sensor's sampling time*/
